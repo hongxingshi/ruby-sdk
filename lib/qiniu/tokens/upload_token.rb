@@ -9,7 +9,7 @@ module Qiniu
 
         include Utils
 
-        attr_accessor :scope, :expires_in, :callback_url, :callback_body, :callback_body_type, :customer, :escape, :async_options, :return_body, :return_url
+        attr_accessor :scope, :expires_in, :callback_url, :callback_body, :callback_body_type, :customer, :escape, :async_options, :return_body, :return_url, :fsize_limit, :mime_limit
 
         def initialize(opts = {})
           @scope = opts[:scope]
@@ -22,6 +22,8 @@ module Qiniu
           @async_options = opts[:async_options]
           @return_body = opts[:return_body]
           @return_url = opts[:return_url]
+          @fsize_limit = opts[:fsize_limit]
+          @mime_limit = opts[:mime_limit]
         end
 
         def generate_signature
@@ -34,6 +36,8 @@ module Qiniu
           params[:asyncOps] = @async_options if !@async_options.nil? && !@async_options.empty?
           params[:returnBody] = @return_body if !@return_body.nil? && !@return_body.empty?
           params[:returnUrl] = @return_url if !@return_url.nil? && !@return_url.empty?
+          params[:fsizeLimit] = @fsize_limit if ! @fsize_limit.nil? && !@fsize_limit.empty?
+          params[:mimeLimit] = @mime_limit if ! @mime_limit.nil? && !@mime_limit.empty?
           Utils.urlsafe_base64_encode(params.to_json)
         end
 
