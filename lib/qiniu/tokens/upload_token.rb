@@ -36,7 +36,7 @@ module Qiniu
           params[:asyncOps] = @async_options if !@async_options.nil? && !@async_options.empty?
           params[:returnBody] = @return_body if !@return_body.nil? && !@return_body.empty?
           params[:returnUrl] = @return_url if !@return_url.nil? && !@return_url.empty?
-          params[:fsizeLimit] = @fsize_limit if ! @fsize_limit.nil? && !@fsize_limit.empty?
+          params[:fsizeLimit] = @fsize_limit if ! @fsize_limit.nil? && @fsize_limit != 0
           params[:mimeLimit] = @mime_limit if ! @mime_limit.nil? && !@mime_limit.empty?
           Utils.urlsafe_base64_encode(params.to_json)
         end
